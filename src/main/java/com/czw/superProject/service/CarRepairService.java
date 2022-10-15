@@ -9,5 +9,11 @@ public interface CarRepairService {
 
 	public int insertCarRepairInfo(CarRepairInDto inDto);
 	
+	public int updateCarRepairInfo(CarRepairInDto inDto);
+	
 	public List<CarRepairOutDto> getCarRepairInfoByCarNum(String carNum);
+	
+	public CarRepairOutDto getCarRepairInfoById(String carId);
+	
+	public String repairInfoDown(String format);
 }

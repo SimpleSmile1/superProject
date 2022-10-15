@@ -36,6 +36,27 @@ values
 #{updateTime,jdbcType=DATE}
 )
 </insert>
+
+<update id="updateCarRepairInfo" parameterType="com.czw.superProject.bean.CarRepair">
+update 
+car_repair
+set
+car_num = #{carNum,jdbcType=INTEGER},
+driver = #{driver,jdbcType=VARCHAR},
+phone_num = #{phoneNum,jdbcType=VARCHAR},
+car_model = #{carModel,jdbcType=VARCHAR},
+repair_time = #{repairTime,jdbcType=DATE},
+repair_place = #{repairPlace,jdbcType=VARCHAR},
+repair_funds = #{repairFunds,jdbcType=INTEGER},
+repair_project = #{repairProject,jdbcType=VARCHAR},
+repair_opinion = #{repairOpinion,jdbcType=VARCHAR},
+leader_approval = #{leaderApproval,jdbcType=VARCHAR},
+remarks = #{remarks,jdbcType=VARCHAR},
+update_time = #{updateTime,jdbcType=DATE}
+where
+id = #{id,jdbcType=INTEGER}
+</update>
+
 <select id="getCarRepairInfo" parameterType="java.lang.String" resultType="com.czw.superProject.Dao.CarRepairDao">
 select
 id,
@@ -55,6 +76,30 @@ car_repair
 <where>
 <if test="carNum != NULL or carNum != ''">
 car_num = #{carNum}
+</if>
+</where>
+order by id
+</select>
+
+<select id="getCarRepairInfoById" parameterType="java.lang.String" resultType="com.czw.superProject.Dao.CarRepairDao">
+select
+id,
+car_num,
+driver,
+phone_num,
+car_model,
+repair_time,
+repair_place,
+repair_funds,
+repair_project,
+repair_opinion,
+leader_approval,
+remarks
+from
+car_repair
+<where>
+<if test="carId != NULL or carId != ''">
+id = #{carId}
 </if>
 </where>
 order by id

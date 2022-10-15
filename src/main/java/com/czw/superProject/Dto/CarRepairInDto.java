@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class CarRepairInDto implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	private String carId;
+	
 	private String carNum;
 	
 	private String driver;
@@ -26,6 +28,14 @@ public class CarRepairInDto implements Serializable{
 	private String leaderApproval;
 	
 	private String remarks;
+
+	public String getCarId() {
+		return carId;
+	}
+
+	public void setCarId(String carId) {
+		this.carId = carId;
+	}
 
 	public String getCarNum() {
 		return carNum;

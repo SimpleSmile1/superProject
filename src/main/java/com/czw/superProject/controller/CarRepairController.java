@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.util.StringUtils;
 import com.czw.superProject.Dto.CarRepairInDto;
 import com.czw.superProject.Dto.CarRepairOutDto;
 import com.czw.superProject.service.CarRepairService;
@@ -40,11 +41,46 @@ public class CarRepairController {
 		}
 		return mapStr;
 	}
+	
+	@RequestMapping(value="/carRepairUpdate",consumes = "application/*", method = RequestMethod.POST)
+	@ResponseBody
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	public Map<String,String> carRepairInfoUpdate(@RequestBody CarRepairInDto inDto) {
+		Logger logger = LoggerFactory.getLogger(getClass());
+		Map<String, String> mapStr = new HashMap<>();
+		int result = carRepairService.updateCarRepairInfo(inDto);
+		
+		if (result > 0) {
+			logger.info("success");
+			mapStr.put("key", "success");
+			mapStr.put("carNum", inDto.getCarNum());
+		}
+		return mapStr;
+	}
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@ResponseBody
 	@RequestMapping(value="/getCarRepairInfo", consumes = "application/*", method = RequestMethod.POST)
 	public List<CarRepairOutDto> getCarRepairInfo(@RequestParam String carNum) {
 		return carRepairService.getCarRepairInfoByCarNum(carNum);
+	}
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@ResponseBody
+	@RequestMapping(value="/getCarRepairInfoById", consumes = "application/*", method = RequestMethod.POST)
+	public CarRepairOutDto getCarRepairInfoById(@RequestParam String carId) {
+		return carRepairService.getCarRepairInfoById(carId);
+	}
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@ResponseBody
+	@RequestMapping(value="/repairInfoLoad")
+	public Map<String,String> repairInfoLoad(@RequestParam String format) {
+		Map<String, String> mapStr = new HashMap<>();
+		String result =  carRepairService.repairInfoDown(format);
+		if (StringUtils.equals(result, "1")) {
+			mapStr.put("result", "success");
+		}
+		return mapStr;
 	}
 }

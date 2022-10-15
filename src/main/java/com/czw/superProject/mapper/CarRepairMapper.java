@@ -12,5 +12,9 @@ public interface CarRepairMapper {
 	
 	public int insertCarRepairInfo(CarRepair carRepair);
 	
+	public int updateCarRepairInfo(CarRepair carRepair);
+	
 	public List<CarRepairDao> getCarRepairInfo(String carNum);
+	
+	public CarRepairDao getCarRepairInfoById(String carId);
 }
