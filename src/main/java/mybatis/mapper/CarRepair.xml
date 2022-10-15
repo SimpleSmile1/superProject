@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czw.superProject.mapper.CarRepairMapper">
+<insert id="insertCarRepairInfo" parameterType="com.czw.superProject.bean.CarRepair">
+insert into
+car_repair
+(
+car_num,
+driver,
+phone_num,
+car_model,
+repair_time,
+repair_place,
+repair_funds,
+repair_project,
+repair_opinion,
+leader_approval,
+remarks,
+create_time,
+update_time
+)
+values
+(
+#{carNum,jdbcType=INTEGER},
+#{driver,jdbcType=VARCHAR},
+#{phoneNum,jdbcType=VARCHAR},
+#{carModel,jdbcType=VARCHAR},
+#{repairTime,jdbcType=DATE},
+#{repairPlace,jdbcType=VARCHAR},
+#{repairFunds,jdbcType=INTEGER},
+#{repairProject,jdbcType=VARCHAR},
+#{repairOpinion,jdbcType=VARCHAR},
+#{leaderApproval,jdbcType=VARCHAR},
+#{remarks,jdbcType=VARCHAR},
+#{createTime,jdbcType=DATE},
+#{updateTime,jdbcType=DATE}
+)
+</insert>
+<select id="getCarRepairInfo" parameterType="java.lang.String" resultType="com.czw.superProject.Dao.CarRepairDao">
+select
+id,
+car_num,
+driver,
+phone_num,
+car_model,
+repair_time,
+repair_place,
+repair_funds,
+repair_project,
+repair_opinion,
+leader_approval,
+remarks
+from
+car_repair
+<where>
+<if test="carNum != NULL or carNum != ''">
+car_num = #{carNum}
+</if>
+</where>
+order by id
+</select>
+</mapper>
