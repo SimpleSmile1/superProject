@@ -15,5 +15,5 @@ public interface CarRepairService {
 	
 	public CarRepairOutDto getCarRepairInfoById(String carId);
 	
-	public String repairInfoDown(String format);
+	public String repairInfoDown(String format, String carId);
 }

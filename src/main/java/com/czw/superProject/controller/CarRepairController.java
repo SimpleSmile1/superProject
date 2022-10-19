@@ -75,9 +75,9 @@ public class CarRepairController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@ResponseBody
 	@RequestMapping(value="/repairInfoLoad")
-	public Map<String,String> repairInfoLoad(@RequestParam String format) {
+	public Map<String,String> repairInfoLoad(@RequestParam String format, @RequestParam String carId) {
 		Map<String, String> mapStr = new HashMap<>();
-		String result =  carRepairService.repairInfoDown(format);
+		String result =  carRepairService.repairInfoDown(format,carId);
 		if (StringUtils.equals(result, "1")) {
 			mapStr.put("result", "success");
 		}
